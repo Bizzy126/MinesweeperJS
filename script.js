@@ -1,11 +1,9 @@
 /*
 
-	Copyright 2024 - Bizzy126.de
-	All unauthorized distribution of this source code will be persecuted to the fullest extent of the law ;-)
+	Copyright 2024 - tkettner - Bizzy126.de
+	  All unauthorized distribution of this source code will be persecuted to the fullest extent of the law ;-)
 	
 	Minesweeper game
-	Ver 1.0 - 06.01.24
-		initial version, no changes
 		
 */
 
@@ -298,10 +296,21 @@ class minesweeper
   checkForWin()
   {
     if(!this.gameRunning) return;
-    var notRevealed = this.cellCount() - document.getElementsByClassName("revealed").length;
-    var markedMines = document.getElementsByClassName("marked").length;
 
-    if(notRevealed == this.mineCount || markedMines == this.mineCount)
+    var notRevealed = this.cellCount() - document.getElementsByClassName("revealed").length;
+    var markedMines = document.getElementsByClassName("marked");
+    var allCorrectMarked = true;
+
+    for(var i = 0; i < markedMines.length; i++)
+    {
+      var markedMine = markedMines[i];
+      if(!markedMine.isMine)
+      {
+        allCorrectMarked = false;
+      }
+    }
+
+    if(notRevealed == this.mineCount || (markedMines.length == this.mineCount && allCorrectMarked))
     {
       this.gamewon();
     }
