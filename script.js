@@ -2,8 +2,6 @@
 
 	Copyright 2024 - tkettner - Bizzy126.de
 	  All unauthorized distribution of this source code will be persecuted to the fullest extent of the law ;-)
-	
-	Minesweeper game
 		
 */
 
@@ -13,9 +11,12 @@ function documentLoaded()
 {
   config = new minesweeperConfig();
   config.info = new gameinfo();
-  config.getElems().forEach(elem => {
-    document.getElementById("gameconfig").appendChild(elem)
-  });
+
+  config.getElems().forEach(
+    elem => 
+    {
+      document.getElementById("gameconfig").appendChild(elem)
+    });
   document.getElementById("gameinfo").replaceChildren(config.info.getElem());
 }
 
@@ -27,6 +28,7 @@ function newGame()
   var stats = game.generate();
   config.info.showGamestats(stats);
   document.getElementById("playfield").replaceChildren(game.getElem());
+
   game.setTableStyle();
 }
 
@@ -76,6 +78,7 @@ class minesweeperConfig
     eX.step = "1"
     eX.value = "30";
     eX.style = numInputStyle;
+    eX.onkeyup = function() { enforceMinMax(eX); }.bind(this);
     this.cellCountXElem = eX;
 
     var eYL = document.createElement("div");
@@ -90,6 +93,7 @@ class minesweeperConfig
     eY.step = "1"
     eY.value = "30";
     eY.style = numInputStyle;
+    eY.onkeyup = function () { enforceMinMax(eY); }.bind(this);
     this.cellCountYElem = eY;
 
     var ePL = document.createElement("div");
@@ -104,6 +108,7 @@ class minesweeperConfig
     eP.step = "0.01"
     eP.value = "0.1";
     eP.style = numInputStyle;
+    eP.onkeyup = function () { enforceMinMax(eP); }.bind(this);
     this.mineProbElem = eP;
 
     var eT = document.createElement("div");
@@ -495,5 +500,21 @@ class cell
   getElem()
   {
     return this.elem;
+  }
+}
+
+function enforceMinMax(el) 
+{
+  if (el.value != "") 
+  {
+    if (parseInt(el.value) < parseInt(el.min)) 
+    {
+      el.value = el.min;
+    }
+
+    if (parseInt(el.value) > parseInt(el.max)) 
+    {
+      el.value = el.max;
+    }
   }
 }

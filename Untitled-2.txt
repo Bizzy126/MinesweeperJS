@@ -1,0 +1,49 @@
+createSord: function(params)
+{
+    if(!params)
+    {
+        throw "params are empty";
+    }
+
+    var parentId = params.parentId || "1";
+    var maskId = params.maskId || "1";
+    var sord = ixConnect.ix().createSord(parentId, maskId, EditInfoC.mbSord).sord;
+    sord.name = params.name || "unnamed";
+
+}
+
+createSordFromTemplate: function(params)
+{
+    if(!params)
+    {
+        throw "params are empty";
+    }
+
+    var maskId, 
+    parentId, 
+    name, 
+    objKeys, 
+    iDateIso, 
+    xDateIso, 
+    aclItems, 
+    desc, 
+    ownerId;
+    if(params.templateSordId)
+    {
+        var ts = ixConnect.ix().checkoutSord(params.templateSordId, SordC.mbAll, LockC.NO);
+        maskId = ts.maskId;
+        parentId = ts.parentId;
+        name = ts.name;
+        objKeys = ts.objKeys;
+        iDateIso = ts.IDateIso;
+        xDateIso = ts.xDateIso;
+        aclItems = ts.aclItems;
+        desc = ts.desc;
+    }
+
+    maskId = params.maskId || maskId || "1";
+    parentId = params.parentId || parentId || "-1";
+    name = params.name || name || "unnamed";
+    objKeys = 
+}
+
