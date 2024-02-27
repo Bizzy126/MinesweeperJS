@@ -1,8 +1,6 @@
 /*
-
 	Copyright 2024 - tkettner - Bizzy126.de
-	  All unauthorized distribution of this source code will be persecuted to the fullest extent of the law ;-)
-		
+  All unauthorized distribution of this source code will be persecuted to the fullest extent of the law ;-)
 */
 
 var game, config;
@@ -40,6 +38,8 @@ class minesweeperConfig
   cellCountYElem;
   mineProbLabelElem;
   mineProbElem;
+  mineProbPrefixLabelElem;
+  timerLabelElem;
  
   get x()
   {
@@ -63,11 +63,12 @@ class minesweeperConfig
 
   buildElems()
   {
-    var numInputStyle = "width: 60px; font-size: 16px; padding: 5px;";
-    var labelStyle = "padding: 5px;";
+    var numInputStyle = "width: 50px; font-size: 16px; padding-left: 6px; background-color: #212121; color: #d6d6d6; border:0px";
+    var labelStyle = "padding: 2px; margin-left:10px;";
+    var prefixStyle = "padding: 2px; margin-right:10px;";
     
     var eXL = document.createElement("div");
-    eXL.innerText = "Cell count X";
+    eXL.innerText = "➡";
     eXL.style = labelStyle;
     this.cellCountXLabelElem = eXL;
 
@@ -82,7 +83,7 @@ class minesweeperConfig
     this.cellCountXElem = eX;
 
     var eYL = document.createElement("div");
-    eYL.innerText = "Cell count Y";
+    eYL.innerText = "⬆";
     eYL.style = labelStyle;
     this.cellCountYLabelElem = eYL;
 
@@ -97,16 +98,26 @@ class minesweeperConfig
     this.cellCountYElem = eY;
 
     var ePL = document.createElement("div");
-    ePL.innerText = "Mine probability";
+    ePL.innerText = "💣❓";
     ePL.style = labelStyle;
     this.mineProbLabelElem = ePL;
 
+    var eTL = document.createElement("div");
+    eTL.innerText = "⏰";
+    eTL.style = labelStyle;
+    this.timerLabelElem = eTL;
+
+    var ePpref = document.createElement("div");
+    ePpref.innerText = "%";
+    ePpref.style = prefixStyle;
+    this.mineProbPrefixLabelElem = ePpref;
+
     var eP = document.createElement("input");
     eP.type = "number";
-    eP.min = "0.03";
-    eP.max = "0.5";
-    eP.step = "0.01"
-    eP.value = "0.1";
+    eP.min = "3";
+    eP.max = "50";
+    eP.step = "1"
+    eP.value = "10";
     eP.style = numInputStyle;
     eP.onkeyup = function () { enforceMinMax(eP); }.bind(this);
     this.mineProbElem = eP;
@@ -115,21 +126,17 @@ class minesweeperConfig
     var eTs = document.createElement("div");
     var eTd = document.createElement("div");
     var eTm = document.createElement("div");
-    var eTp = document.createElement("div");
 
     eTs.id = "statSeconds";
     eTs.innerText = "00";
     eTd.innerText = ".";
     eTm.id = "statMillis";
-    eTm.innerText = "00"
-    eTp.innerText = "seconds ⌚";
-    eTp.style = "padding: 0px 0px 0px 5px"
+    eTm.innerText = "00";
 
-    eT.style = "display: flex; " + labelStyle;
+    eT.style = "display: flex; " + prefixStyle;
     eT.appendChild(eTs);
     eT.appendChild(eTd);
     eT.appendChild(eTm);
-    eT.appendChild(eTp);
                                            
     this.timerElem = eT;
   }
@@ -143,6 +150,8 @@ class minesweeperConfig
       this.cellCountYElem, 
       this.mineProbLabelElem, 
       this.mineProbElem,
+      this.mineProbPrefixLabelElem,
+      this.timerLabelElem,
       this.timerElem
     ]
   }
@@ -243,7 +252,7 @@ class minesweeper
         var isMine = false;
         var prob = Math.random();
 
-        if(prob >= 1 - this.mineProb)
+        if(prob >= 1 - (this.mineProb/100))
         {
           isMine = true;
           mineCount++;
