@@ -30,133 +30,6 @@ function newGame()
   game.setTableStyle();
 }
 
-class minesweeperConfig
-{
-  cellCountXLabelElem;
-  cellCountXElem;
-  cellCountYLabelElem;
-  cellCountYElem;
-  mineProbLabelElem;
-  mineProbElem;
-  mineProbPrefixLabelElem;
-  timerLabelElem;
- 
-  get x()
-  {
-    return this.cellCountXElem.value;
-  }
-
-  get y()
-  {
-    return this.cellCountYElem.value;
-  }
-
-  get mineProb()
-  {
-    return this.mineProbElem.value;
-  }
-
-  constructor()
-  {
-    this.buildElems();
-  }
-
-  buildElems()
-  {
-    var numInputStyle = "width: 50px; font-size: 16px; padding-left: 6px; background-color: #212121; color: #d6d6d6; border:0px";
-    var labelStyle = "padding: 2px; margin-left:10px;";
-    var prefixStyle = "padding: 2px; margin-right:10px;";
-    
-    var eXL = document.createElement("div");
-    eXL.innerText = "➡";
-    eXL.style = labelStyle;
-    this.cellCountXLabelElem = eXL;
-
-    var eX = document.createElement("input");
-    eX.type = "number";
-    eX.min = "10";
-    eX.max = "60";
-    eX.step = "1"
-    eX.value = "30";
-    eX.style = numInputStyle;
-    eX.onkeyup = function() { enforceMinMax(eX); }.bind(this);
-    this.cellCountXElem = eX;
-
-    var eYL = document.createElement("div");
-    eYL.innerText = "⬆";
-    eYL.style = labelStyle;
-    this.cellCountYLabelElem = eYL;
-
-    var eY = document.createElement("input");
-    eY.type = "number";
-    eY.min = "10";
-    eY.max = "60";
-    eY.step = "1"
-    eY.value = "30";
-    eY.style = numInputStyle;
-    eY.onkeyup = function () { enforceMinMax(eY); }.bind(this);
-    this.cellCountYElem = eY;
-
-    var ePL = document.createElement("div");
-    ePL.innerText = "💣❓";
-    ePL.style = labelStyle;
-    this.mineProbLabelElem = ePL;
-
-    var eTL = document.createElement("div");
-    eTL.innerText = "⏰";
-    eTL.style = labelStyle;
-    this.timerLabelElem = eTL;
-
-    var ePpref = document.createElement("div");
-    ePpref.innerText = "%";
-    ePpref.style = prefixStyle;
-    this.mineProbPrefixLabelElem = ePpref;
-
-    var eP = document.createElement("input");
-    eP.type = "number";
-    eP.min = "3";
-    eP.max = "50";
-    eP.step = "1"
-    eP.value = "10";
-    eP.style = numInputStyle;
-    eP.onkeyup = function () { enforceMinMax(eP); }.bind(this);
-    this.mineProbElem = eP;
-
-    var eT = document.createElement("div");
-    var eTs = document.createElement("div");
-    var eTd = document.createElement("div");
-    var eTm = document.createElement("div");
-
-    eTs.id = "statSeconds";
-    eTs.innerText = "00";
-    eTd.innerText = ".";
-    eTm.id = "statMillis";
-    eTm.innerText = "00";
-
-    eT.style = "display: flex; " + prefixStyle;
-    eT.appendChild(eTs);
-    eT.appendChild(eTd);
-    eT.appendChild(eTm);
-                                           
-    this.timerElem = eT;
-  }
-
-  getElems()
-  {
-    return [
-      this.cellCountXLabelElem, 
-      this.cellCountXElem, 
-      this.cellCountYLabelElem, 
-      this.cellCountYElem, 
-      this.mineProbLabelElem, 
-      this.mineProbElem,
-      this.mineProbPrefixLabelElem,
-      this.timerLabelElem,
-      this.timerElem
-    ]
-  }
-}
-
 class minesweeper
 {
   constructor(config)
@@ -509,6 +382,133 @@ class cell
   getElem()
   {
     return this.elem;
+  }
+}
+
+class minesweeperConfig
+{
+  cellCountXLabelElem;
+  cellCountXElem;
+  cellCountYLabelElem;
+  cellCountYElem;
+  mineProbLabelElem;
+  mineProbElem;
+  mineProbPrefixLabelElem;
+  timerLabelElem;
+ 
+  get x()
+  {
+    return this.cellCountXElem.value;
+  }
+
+  get y()
+  {
+    return this.cellCountYElem.value;
+  }
+
+  get mineProb()
+  {
+    return this.mineProbElem.value;
+  }
+
+  constructor()
+  {
+    this.buildElems();
+  }
+
+  buildElems()
+  {
+    var numInputStyle = "width: 50px; font-size: 16px; padding-left: 6px; background-color: #212121; color: #d6d6d6; border:0px";
+    var labelStyle = "padding: 2px; margin-left:10px; margin-right:4px";
+    var prefixStyle = "padding: 2px; margin-right:10px;";
+    
+    var eXL = document.createElement("div");
+    eXL.innerText = "➡";
+    eXL.style = labelStyle;
+    this.cellCountXLabelElem = eXL;
+
+    var eX = document.createElement("input");
+    eX.type = "number";
+    eX.min = "10";
+    eX.max = "60";
+    eX.step = "1"
+    eX.value = "30";
+    eX.style = numInputStyle;
+    eX.onkeyup = function() { enforceMinMax(eX); }.bind(this);
+    this.cellCountXElem = eX;
+
+    var eYL = document.createElement("div");
+    eYL.innerText = "⬆";
+    eYL.style = labelStyle;
+    this.cellCountYLabelElem = eYL;
+
+    var eY = document.createElement("input");
+    eY.type = "number";
+    eY.min = "10";
+    eY.max = "60";
+    eY.step = "1"
+    eY.value = "30";
+    eY.style = numInputStyle;
+    eY.onkeyup = function () { enforceMinMax(eY); }.bind(this);
+    this.cellCountYElem = eY;
+
+    var ePL = document.createElement("div");
+    ePL.innerText = "💣❓";
+    ePL.style = labelStyle;
+    this.mineProbLabelElem = ePL;
+
+    var eTL = document.createElement("div");
+    eTL.innerText = "⏰";
+    eTL.style = labelStyle;
+    this.timerLabelElem = eTL;
+
+    var ePpref = document.createElement("div");
+    ePpref.innerText = "%";
+    ePpref.style = prefixStyle;
+    this.mineProbPrefixLabelElem = ePpref;
+
+    var eP = document.createElement("input");
+    eP.type = "number";
+    eP.min = "3";
+    eP.max = "50";
+    eP.step = "1"
+    eP.value = "10";
+    eP.style = numInputStyle;
+    eP.onkeyup = function () { enforceMinMax(eP); }.bind(this);
+    this.mineProbElem = eP;
+
+    var eT = document.createElement("div");
+    var eTs = document.createElement("div");
+    var eTd = document.createElement("div");
+    var eTm = document.createElement("div");
+
+    eTs.id = "statSeconds";
+    eTs.innerText = "00";
+    eTd.innerText = ".";
+    eTm.id = "statMillis";
+    eTm.innerText = "00";
+
+    eT.style = "display: flex; " + prefixStyle;
+    eT.appendChild(eTs);
+    eT.appendChild(eTd);
+    eT.appendChild(eTm);
+                                           
+    this.timerElem = eT;
+  }
+
+  getElems()
+  {
+    return [
+      this.cellCountXLabelElem, 
+      this.cellCountXElem, 
+      this.cellCountYLabelElem, 
+      this.cellCountYElem, 
+      this.mineProbLabelElem, 
+      this.mineProbElem,
+      this.mineProbPrefixLabelElem,
+      this.timerLabelElem,
+      this.timerElem
+    ]
   }
 }
 
