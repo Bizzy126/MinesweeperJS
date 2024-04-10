@@ -459,7 +459,7 @@ class minesweeperConfig
 
     var eTL = document.createElement("div");
     eTL.innerText = "⏰";
-    eTL.style = labelStyle;
+    //eTL.style = labelStyle;
     this.timerLabelElem = eTL;
 
     var ePpref = document.createElement("div");
