@@ -1,0 +1,275 @@
+@color-dark: #212121;
+@gray-dark: #131313;
+@gray-light: #efefef;
+@gray-light-btn: #868686;
+
+body {
+  margin: 0;
+  background-color: @color-dark;
+  color: @gray-light;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  &.light-mode {
+    background: #fff;
+    color: @color-dark;
+
+    .light-text {
+      display: none;
+    }
+
+    .gamecontainer,
+    .gameinfo-container,
+    .footer {
+      background: @gray-light;
+
+      > *:not(a) {
+        color: @gray-dark;
+      }
+    }
+
+    input[type="number"] {
+      background: #fff;
+      color: #000;
+    }
+
+    .grid_item {
+      background: #d5d5d5;
+
+      &.revealed {
+        background-color: #efefef;
+      }
+    }
+
+    .switch-mode-btn,
+    button {
+      color: #fff;
+      background: @gray-light-btn;
+    }
+  }
+
+  &.dark-mode {
+    .dark-text {
+      display: none;
+    }
+
+    .switch-mode-btn {
+      color: #fff;
+      background: #3b3838;
+    }
+  }
+}
+
+#content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.footer {
+  background-color: @gray-dark;
+  text-align: center;
+  margin: auto;
+  padding: 25px;
+  margin-top: 20px;
+
+  a {
+    color: rgb(49, 97, 255);
+  }
+}
+
+.header {
+  padding: 20px;
+
+   button {
+    background-color: black;
+    color: rgb(228, 228, 228);
+    font-size: large;
+  }
+
+   div {
+    font-size: large;
+  }
+}
+
+.headline-wrapper {
+  padding: 20px;
+
+  @media screen and (min-width: 650px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.gameinfo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.button {
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: normal;
+  padding: 15px 50px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+
+  &:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+  }
+}
+
+.gamecontainer {
+  margin: 0 auto 15px;
+  background-color: @gray-dark;
+
+  > * {
+    color: #E4E4E4;
+  }
+}
+
+.gameinfo-container {
+  padding: 10px 15px;
+  background-color: @gray-dark;
+
+  .gameinfo {
+    padding-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+
+.gameconfig {
+  display: flex;
+  padding: 0 0 20px;
+  justify-content: center;
+}
+
+.playfield-wrapper {
+  margin: 0 auto;
+}
+
+.playfield {
+  width: 100%;
+  transform-origin: center top;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid_item {
+  background-color: rgb(68, 68, 68);
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+  vertical-align: middle;
+  transition: all 300ms cubic-bezier(.5, 1, .5, 1);
+
+  &.revealed {
+    background-color: rgb(167, 167, 167);
+    color: @color-dark;
+  }
+
+  &:hover:not(.marked):not(.mine):not(.revealed) {
+    background-color: #1A1A1A;
+  }
+
+}
+
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow:
+          0 1px 1px rgba(0, 0, 0, 0.2),
+          0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: auto;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+.marked {
+  background-color: rgb(68, 39, 39);
+}
+
+.mine {
+  background-color: red;
+}
+
+input[type="number"] {
+  width: 50px;
+  font-size: 16px;
+  padding-left: 6px;
+  background-color: rgb(33, 33, 33);
+  color: rgb(214, 214, 214);
+  border: 0px;
+}
+
+.switch-mode-btn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border-radius: 2px;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+  color: #000;
+  z-index: 1;
+  padding: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  &.show {
+    display: flex;
+  }
+
+  p {
+    margin-top: 0;
+    font-size: 25px;
+  }
+
+  .popup-btn {
+    border-radius: 3px;
+    font-size: 20px;
+    padding: 8px 45px;
+    background: @gray-light-btn;
+    color: #fff;
+    border: none;
+    margin-top: 15px;
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 2px;
+    font-size: 33px;
+  }
+}

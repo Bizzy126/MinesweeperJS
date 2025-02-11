@@ -1,34 +1,62 @@
 <html>
+<head>
+  <link href="style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  <head>
-    <link href="style.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  </head>
+  <link rel="stylesheet/less" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-  <body onload="documentLoaded()">
-    <div class="gamecontainer">
-	
+
+
+  <script src="scale-view.js"></script>
+</head>
+
+<body onload="documentLoaded()" class="dark-mode">
+<div id="content-wrapper">
+  <div class="gamecontainer">
+
+    <div class="headline-wrapper">
       <h1>Minesweeper JS</h1>
-      <div class="header">
-	  
-        <div class="gameinfo">Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling you how many mines touch the square. You can use the number clues to solve the game by opening all of the safe squares. If you click on a mine you lose the game!</div>
-        
-		    <div class="gameinfo" id="gameinfo"></div>
-        <div class="gameconfig" id="gameconfig"></div>
-		
-        <div class="gameinfo">
-          <button class="button" onclick="newGame()">New Game</button>
-        </div>
-      </div>
 
+      <button class="switch-mode-btn">
+        <span class="light-text">&#x263C; Switch to Light-Mode</span>
+        <span class="dark-text">&#x263C; Switch to Dark-Mode </span>
+      </button>
     </div>
+
+
+    <div class="header">
+      <div class="gameinfo">Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling you how many mines touch the square. You can use the number clues to solve the game by opening all of the safe squares. If you click on a mine you lose the game!</div>
+
+      <div class="gameinfo">
+        <button class="button" onclick="newGame()">New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <p></p>
+
+    <button class="popup-btn" onclick="newGame()">New Game</button>
+  </div>
+
+  <div class="playfield-wrapper">
+    <div class="gameinfo-container">
+      <div class="gameinfo" id="gameinfo"></div>
+      <div class="gameconfig" id="gameconfig"></div>
+    </div>
+
     <div class="playfield" id="playfield"></div>
-    <div class="footer">
-      Minesweeper JS was made 2024 with ♥ by <a href="https://steamcommunity.com/id/Bizzy126/">Bizzy126</a></br>
-      <div><a href="https://github.com/Bizzy126/MinesweeperJS">Minesweeper JS on Github</a> - <a href="https://github.com/Bizzy126">Bizzy126 on Github</a></div>
-    </div>
-  </body>
-  
-  <script src="script.js"></script>
+  </div>
+
+  <div class="footer">
+    Minesweeper JS was made 2024 with ♥ by <a href="https://steamcommunity.com/id/Bizzy126/">Bizzy126</a></br>
+    <div><a href="https://github.com/Bizzy126">Bizzy126 on Github</a><a></a></div>
+  </div>
+</div>
+</body>
+
+<script src="script.js"></script>
 </html>

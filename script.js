@@ -20,6 +20,10 @@ function documentLoaded()
 
 function newGame() 
 {
+  closePopup();
+  scrollToPlayfield();
+  setContentHeight();
+
   game?.stopTimer();
   game = new minesweeper(config);
 
@@ -28,6 +32,7 @@ function newGame()
   document.getElementById("playfield").replaceChildren(game.getElem());
 
   game.setTableStyle();
+  scaleElement();
 }
 
 class minesweeper
@@ -220,16 +225,23 @@ class minesweeper
   gamewon()
   {
     this.endAll();
-    this.info.showText("Victory!");
-    alert("Victory!")
+    this.openPopup('Winner! 🎉');
   }
 
   gameover(cell)
   {
     this.endAll();
     this.info.showText("Gameover! 👿");
+
+    this.openPopup("Gameover! 👿");
+  }
+
+  openPopup(text) {
+    $('.popup p').text(text);
+    $('.popup').addClass('show');
   }
 }
+
 
 class gameinfo
 {
@@ -418,7 +430,7 @@ class minesweeperConfig
 
   buildElems()
   {
-    var numInputStyle = "width: 50px; font-size: 16px; padding-left: 6px; background-color: #212121; color: #d6d6d6; border:0px";
+   // var numInputStyle = "width: 50px; font-size: 16px; padding-left: 6px; background-color: #212121; color: #d6d6d6; border:0px";
     var labelStyle = "padding: 2px; margin-left:10px; margin-right:4px";
     var prefixStyle = "padding: 2px; margin-right:10px;";
     
@@ -431,9 +443,9 @@ class minesweeperConfig
     eX.type = "number";
     eX.min = "10";
     eX.max = "60";
-    eX.step = "1"
+    eX.step = "1";
     eX.value = "30";
-    eX.style = numInputStyle;
+    //eX.style = numInputStyle;
     eX.onkeyup = function() { enforceMinMax(eX); }.bind(this);
     this.cellCountXElem = eX;
 
@@ -448,7 +460,7 @@ class minesweeperConfig
     eY.max = "60";
     eY.step = "1"
     eY.value = "30";
-    eY.style = numInputStyle;
+  //  eY.style = numInputStyle;
     eY.onkeyup = function () { enforceMinMax(eY); }.bind(this);
     this.cellCountYElem = eY;
 
@@ -473,7 +485,7 @@ class minesweeperConfig
     eP.max = "50";
     eP.step = "1"
     eP.value = "10";
-    eP.style = numInputStyle;
+   // eP.style = numInputStyle;
     eP.onkeyup = function () { enforceMinMax(eP); }.bind(this);
     this.mineProbElem = eP;
 
@@ -527,3 +539,17 @@ function enforceMinMax(el)
     }
   }
 }
+
+function closePopup() {
+  $('.popup').removeClass('show');
+}
+
+function scrollToPlayfield() {
+    $('html, body').animate({
+        scrollTop: $('.playfield-wrapper').offset().top
+    }, 100);
+}
+
+$(".switch-mode-btn").click(function(){
+    $("body").toggleClass("dark-mode light-mode");
+});
